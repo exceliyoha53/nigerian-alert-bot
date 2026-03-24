@@ -39,7 +39,9 @@ def fetch_latest_jobs(limit: int = 5) -> list[dict]:
         """, (limit,))
         rows = cursor.fetchall()
         logger.info(f"Fetched {len(rows)} latest jobs from database")
+        
         return [dict(row) for row in rows]
+    
     except Exception as e:
         logger.error(f"Error fetching latest jobs: {e}")
         return []
