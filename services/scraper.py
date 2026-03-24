@@ -1,13 +1,14 @@
 import sys
 import os
 import logging
+import asyncio
 from dotenv import load_dotenv  
 
 load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-def run_scraper() -> dict:
+async def run_scraper() -> dict:
     """
     Triggers the Month 1 Jobberman pipeline directly by importing and calling
     run_pipeline() from the nigerian-job-intelligence project.
@@ -43,7 +44,7 @@ def run_scraper() -> dict:
         from main import run_pipeline
         
         logger.info("Starting Month 1 pipeline via direct import...")
-        run_pipeline()  # runs scrape → save → notify once, then returns
+        await asyncio.to_thread(run_pipeline)  # runs scrape → save → notify once, then returns
         logger.info("Pipeline completed successfully")
 
         return {

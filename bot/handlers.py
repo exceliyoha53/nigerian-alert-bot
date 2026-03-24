@@ -165,7 +165,7 @@ async def scrape_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     await update.message.reply_text(
       "🔄 Starting Jobberman scrape. This may take 1-2 minutes..."   
     )
-    result = run_scraper()
+    result = await run_scraper()
     if result["success"]:
         await update.message.reply_text(f"✅ {result['message']}")
     else:

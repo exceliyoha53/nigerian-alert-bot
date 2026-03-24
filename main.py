@@ -2,17 +2,12 @@ import logging
 import sys
 import os
 from dotenv import load_dotenv
-
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler
+from telegram.request import HTTPXRequest 
 
-from bot.handlers import (
-    start_handler,
-    latest_handler,
-    search_handler,
-    scrape_handler,
-    stats_handler,
-    button_handler
-)
+request = HTTPXRequest(connect_timeout=30, read_timeout=30)
+
+from bot.handlers import start_handler,latest_handler,search_handler,scrape_handler,stats_handler,button_handler # noqa E402
 
 load_dotenv()
 
@@ -39,7 +34,7 @@ def main() -> None:
     
     logger.info("Building bot application...")
 
-    app = ApplicationBuilder().token(token).build()
+    app = ApplicationBuilder().token(token).request(request).build()
 
     app.add_handler(CommandHandler("start", start_handler))
     app.add_handler(CommandHandler("latest", latest_handler))
