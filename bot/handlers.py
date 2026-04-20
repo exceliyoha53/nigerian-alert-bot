@@ -157,19 +157,19 @@ async def _do_location_search(update: Update, location: str, is_callback: bool =
 async def scrape_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
     Handles the /scrape Command.
-    Triggers Month 1 jobberman pipeline and reports the result.
-    Warns the user uupfront that scraping takes time.
+    Tells the user that scrape is done automatically
     """
     logger.info(f"User {update.effective_user.id} triggered /scrape")
 
-    await update.message.reply_text(
-      "🔄 Starting Jobberman scrape. This may take 1-2 minutes..."   
+    await update.message.reply_text("scraping is handled by the scheduled pipeline." )  
+    """
     )
     result = await run_scraper()
     if result["success"]:
         await update.message.reply_text(f"✅ {result['message']}")
     else:
         await update.message.reply_text(f"❌ {result['message']}")
+    """
 
 async def stats_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
