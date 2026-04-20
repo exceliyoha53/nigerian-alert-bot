@@ -14,7 +14,8 @@ async def run_scraper() -> dict:
     run_pipeline() from the nigerian-job-intelligence project.
 
     Adds the Month 1 project path to sys.path so Python can find its modules,
-    then imports and calls run_pipeline() which scrapes, saves, and notifies.
+    then imports and calls run_pipeline() via asyncio.to_thread() to safely
+    run the synchronous Playwright pipeline inside an async bot without blocking.
 
     Returns:
         dict with keys:
