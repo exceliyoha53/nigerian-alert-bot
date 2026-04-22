@@ -161,15 +161,14 @@ async def scrape_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     """
     logger.info(f"User {update.effective_user.id} triggered /scrape")
 
-    await update.message.reply_text("scraping is handled by the scheduled pipeline." )  
-    """
-    )
+    await update.message.reply_text("scraping please wait..." )  
+    
     result = await run_scraper()
     if result["success"]:
         await update.message.reply_text(f"✅ {result['message']}")
     else:
         await update.message.reply_text(f"❌ {result['message']}")
-    """
+    
 
 async def stats_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
